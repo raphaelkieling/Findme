@@ -1,0 +1,40 @@
+{
+  "name": "Findme-API",
+  "version": "1.0.0",
+  "description": "Findme é uma aplicação que faz o intermédio entre o cliente e o prestador de serviço.",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelkieling/Findme-API.git"
+  },
+  "keywords": [
+    "findme",
+    "pagamentos",
+    "serviços"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raphaelkieling/Findme-API/issues"
+  },
+  "homepage": "https://github.com/raphaelkieling/Findme-API#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.1",
+    "graphql-tools": "^2.21.0",
+    "mysql2": "^1.5.2",
+    "nodemon": "^1.17.1",
+    "sequelize": "^4.35.2",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "husky": "^0.15.0-rc.8"
+  }
+}
