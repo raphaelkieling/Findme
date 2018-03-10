@@ -1,8 +1,7 @@
 {
   "name": "Findme-API",
   "version": "1.0.0",
-  "description":
-    "Findme é uma aplicação que faz o intermédio entre o cliente e o prestador de serviço.",
+  "description": "Findme é uma aplicação que faz o intermédio entre o cliente e o prestador de serviço.",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon index.js",
@@ -15,7 +14,11 @@
     "type": "git",
     "url": "git+https://github.com/raphaelkieling/Findme-API.git"
   },
-  "keywords": ["findme", "pagamentos", "serviços"],
+  "keywords": [
+    "findme",
+    "pagamentos",
+    "serviços"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
