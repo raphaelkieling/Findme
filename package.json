@@ -4,7 +4,7 @@
   "description": "Findme é uma aplicação que faz o intermédio entre o cliente e o prestador de serviço.",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon index.js",
+    "start": "JWT_SECRET=HELLO_DARK ./node_modules/.bin/nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
@@ -26,12 +26,14 @@
   },
   "homepage": "https://github.com/raphaelkieling/Findme-API#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.1",
     "graphql-tools": "^2.21.0",
+    "jsonwebtoken": "^8.2.0",
     "lodash": "^4.17.5",
     "mysql2": "^1.5.2",
     "nodemon": "^1.17.1",

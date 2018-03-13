@@ -9,8 +9,12 @@ const token     = require('./entities/token/token.schema').tokenDef;
 
 const usuarioResolver   = require('./entities/usuario/usuario.resolver');
 const permissaoResolver = require('./entities/permissao/permissao.resolver');
+const tokenResolver     = require('./entities/token/token.resolvers');
 
-const resolvers = _.merge(usuarioResolver,permissaoResolver);
+const resolvers = _.merge(
+   usuarioResolver
+  ,permissaoResolver
+  ,tokenResolver);
 
 const SchemaDefinition = `
   type Schema{

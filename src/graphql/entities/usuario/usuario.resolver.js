@@ -1,3 +1,6 @@
+const compose = require('../../composable/composable.resolver');
+const authResolver = require('../../composable/auth.resolver');
+
 const usuarioResolver = {
     Usuario: {
         permissoes(usuario, args, { db }) {
@@ -6,15 +9,15 @@ const usuarioResolver = {
                     include: [{
                         model: db.usuario,
                         where: { id: usuario.get('id') }
-                    }]
+                    }],
                 })
                 .then((res) => res);
         }
     },
     Query: {
-        usuarios(usuarios, args, { db }) {
+        usuarios: compose(authResolver)((usuarios, args, { db }) => {
             return db.usuario.findAll().then(res => res);
-        },
+        }),
         usuario(usuario, { id }, { db }) {
             return db.usuario.findById(id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
