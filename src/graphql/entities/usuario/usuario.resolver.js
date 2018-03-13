@@ -1,5 +1,7 @@
 const compose = require('../../composable/composable.resolver');
 const authResolver = require('../../composable/auth.resolver');
+const verifyToken = require('../../composable/verify-token.resolver');
+const permissionCompose = require('../../composable/permission.resolver');
 
 const usuarioResolver = {
     Usuario: {
@@ -15,7 +17,7 @@ const usuarioResolver = {
         }
     },
     Query: {
-        usuarios: compose(authResolver)((usuarios, args, { db }) => {
+        usuarios: compose(authResolver,verifyToken,permissionCompose('Administrador','Cliente'))((usuarios, args, { db }) => {
             return db.usuario.findAll().then(res => res);
         }),
         usuario(usuario, { id }, { db }) {

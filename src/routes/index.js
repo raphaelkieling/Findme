@@ -15,12 +15,10 @@ router.use("/graphql",
         req['context'].db = db;
         next();
     }
-    , graphqlExpress({
+    , graphqlExpress((req) => ({
         schema,
         graphiql: true,
-        context: {
-            db
-        }
-    }));
+        context: req['context']
+    })));
 
 module.exports = router;

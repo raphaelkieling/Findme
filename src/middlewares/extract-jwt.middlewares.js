@@ -4,7 +4,7 @@ const db = require('../models');
 
 const extractJWTMiddleware = () => {
     return (req, res, next) => {
-        let authorization = req.get('authorization');
+        let authorization = req.get('Authorization');
         let token = authorization ? authorization.split(' ')[1] : undefined;
 
         req['context'] = {};

@@ -5,7 +5,7 @@ const tokenDef = `
 `
 
 const tokenMutations = `
-    createToken(usuario:String!, senha:String!, permissoes:[String]! ):Token
+    createToken(usuario:String!, senha:String!):Token
 `;
 
 module.exports =  {

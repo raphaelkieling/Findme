@@ -15,3 +15,5 @@ const verifyTokenResolver = (resolver) => {
         })
     }
 }
+
+module.exports = verifyTokenResolver;
