@@ -9,6 +9,6 @@ function listenServer() {
   });
 }
 
-models.sequelize.sync({ force:true }).then(() => {
+models.sequelize.sync({ force:false }).then(() => {
   listenServer();
 });
