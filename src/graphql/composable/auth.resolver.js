@@ -1,6 +1,6 @@
 const authResolver = (resolver) => {
     return (parent, args, context, info) => {
-        if(context.user || context.authorization){
+        if(context.userAuth || context.authorization){
             return resolver(parent,args,context,info);
         }
 

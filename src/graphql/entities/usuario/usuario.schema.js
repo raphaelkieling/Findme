@@ -22,7 +22,7 @@ const usuarioDef = `
 const usuarioQuery = `
     me:Usuario
     usuarios:[Usuario!]!
-    usuario(id: ID!):Usuario!
+    usuario(id:ID!):Usuario!
 `;
 
 const usuarioMutation = `

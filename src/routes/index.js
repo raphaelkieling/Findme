@@ -9,6 +9,7 @@ const db = require('../models');
 
 router.get("/welcome", welcomeRouter.welcome);
 router.get("/", welcomeRouter.welcome);
+
 router.use("/graphql",
     extractJWTMiddleware(),
     (req, res, next) => {

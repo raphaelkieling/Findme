@@ -13,21 +13,36 @@ const permissionResolver = (...permissions) => {
                 }
 
                 const idUsuario = decoded.sub;
-                
+
                 const permissoesVinculdas = await db.permissao.findAll({
-                    include:[{
-                        model:db.usuario,
-                        where:{ id: idUsuario }
+                    include: [{
+                        model: db.usuario,
+                        where: { id: idUsuario }
                     }]
                 });
 
-                console.log(permissoesVinculdas);
+                const permissoesExistem = permissoesVinculdas.filter(permissoesQueBatem(permissions));
+
+                if(!permissoesExistem || permissoesExistem.length <= 0){
+                    throw new Error('Não tem permissões suficiente para acessar isto.');
+                    return;
+                }
                 
                 return resolver(parent, args, context, info);
             });
 
 
         }
+    }
+}
+
+function permissoesQueBatem(permissoes) {
+    return (permissaoVinculada) => {
+        for(let permissaoRequerida of permissoes){
+            if(permissaoVinculada.get('nome') === permissaoRequerida) return true; 
+        }
+
+        return false;
     }
 }
 

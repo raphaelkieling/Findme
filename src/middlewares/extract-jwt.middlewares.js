@@ -20,7 +20,7 @@ const extractJWTMiddleware = () => {
             }).then((user) => {
 
                 if (user) {
-                    req['context']['user'] = {
+                    req['context']['userAuth'] = {
                         id: user.get('id'),
                         usuario: user.get('usuario')
                     }

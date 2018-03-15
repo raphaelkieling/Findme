@@ -14,11 +14,11 @@ const tokenResolvers = {
                     throw new Error(errorMessage);
 
                 const payload = {
-                    sub:user.get('id')
+                    sub: user.get('id')
                 }
 
                 return {
-                    token: jwt.sign(payload,secret)
+                    token: jwt.sign(payload, secret)
                 }
             });
         }

@@ -17,25 +17,31 @@ const usuarioResolver = {
         }
     },
     Query: {
-        usuarios: compose(authResolver,verifyToken,permissionCompose('Administrador','Cliente'))((usuarios, args, { db }) => {
+        usuarios: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((usuarios, args, { db }) => {
             return db.usuario.findAll().then(res => res);
         }),
-        usuario(usuario, { id }, { db }) {
+        usuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((usuario, { id }, { db }) => {
             return db.usuario.findById(id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
                 return user;
             })
-        }
+        }),
+        me: compose(authResolver, verifyToken, permissionCompose('user_me'))((usuario, args, { db, userAuth }) => {
+            return db.usuario.findById(userAuth.id).then(user => {
+                if (!user) throw new Error(`User with id ${id} not found`);
+                return user;
+            })
+        })
     },
     Mutation: {
-        criarUsuario(parent, { input }, { db }) {
+        criarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { input }, { db }) {
             return db.sequelize.transaction(async (t) => {
                 const user = await db.usuario.create(input, { transaction: t });
                 await user.addPermissaos(input.permissoes, { transaction: t });
                 return user;
 
             })
-        },
+        }),
         editarUsuario(parent, { id, input }, { db }) {
             id = parseInt(id);
             return db.sequelize.transaction((t) => {
