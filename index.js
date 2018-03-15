@@ -9,6 +9,6 @@ function listenServer() {
   });
 }
 
-models.sequelize.sync({ force: false, logging: false }).then(() => {
+models.sequelize.sync({ force: false, logging: true }).then(() => {
   listenServer();
 });

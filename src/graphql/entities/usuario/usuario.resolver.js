@@ -34,7 +34,7 @@ const usuarioResolver = {
         })
     },
     Mutation: {
-        criarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { input }, { db }) {
+        criarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { input }, { db }) => {
             return db.sequelize.transaction(async (t) => {
                 const user = await db.usuario.create(input, { transaction: t });
                 await user.addPermissaos(input.permissoes, { transaction: t });
@@ -42,7 +42,7 @@ const usuarioResolver = {
 
             })
         }),
-        editarUsuario(parent, { id, input }, { db }) {
+        editarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { id, input }, { db }) => {
             id = parseInt(id);
             return db.sequelize.transaction((t) => {
                 return db.usuario.findById(id).then((user) => {
@@ -50,7 +50,7 @@ const usuarioResolver = {
                     return user.update(input, { transaction: t });
                 });
             })
-        },
+        }),
         deletarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
             return db.sequelize.transaction((t) => {
