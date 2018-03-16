@@ -4,6 +4,7 @@ const usuarioDef = `
         usuario:String!
         senha:String!
         permissoes:[Permissao!]!
+        pessoa:Pessoa
         ativo:Boolean!
     }
 
@@ -17,6 +18,18 @@ const usuarioDef = `
         usuario:String!
         ativo:Boolean!
     }
+
+    input criarClienteInput{
+        usuario:String!
+        senha:String!
+        pessoa:PessoaCreateInput!
+    }
+
+    input criarProfissionalInput{
+        usuario:String!
+        senha:String!
+        pessoa:PessoaCreateInput!
+    }
 `;
 
 const usuarioQuery = `
@@ -27,6 +40,8 @@ const usuarioQuery = `
 
 const usuarioMutation = `
     criarUsuario(input:criarUsuarioInput!):Usuario!
+    criarCliente(input:criarClienteInput!):Usuario!
+    criarProfissional(input:criarProfissionalInput!):Usuario!
     editarUsuario(id: ID!, input:editarUsuarioInput!):Usuario!
     deletarUsuario(id:ID!):Boolean!
 `;

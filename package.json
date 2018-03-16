@@ -4,7 +4,8 @@
   "description": "Findme é uma aplicação que faz o intermédio entre o cliente e o prestador de serviço.",
   "main": "index.js",
   "scripts": {
-    "start": "JWT_SECRET=HELLO_DARK ./node_modules/.bin/nodemon index.js",
+    "start": "NODE_ENV=development JWT_SECRET=HELLO_DARK ./node_modules/.bin/nodemon index.js",
+    "offline": "NODE_ENV=offline JWT_SECRET=HELLO_DARK ./node_modules/.bin/nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {

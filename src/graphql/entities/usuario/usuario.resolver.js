@@ -5,15 +5,14 @@ const permissionCompose = require('../../composable/permission.resolver');
 
 const usuarioResolver = {
     Usuario: {
-        permissoes(usuario, args, { db }) {
-            return db.permissao
+        async permissoes(usuario, args, { db }) {
+            return await db.permissao
                 .findAll({
                     include: [{
                         model: db.usuario,
                         where: { id: usuario.get('id') }
                     }],
-                })
-                .then((res) => res);
+                });
         }
     },
     Query: {
@@ -26,7 +25,7 @@ const usuarioResolver = {
                 return user;
             })
         }),
-        me: compose(authResolver, verifyToken, permissionCompose('user_me'))((usuario, args, { db, userAuth }) => {
+        me: compose(authResolver, verifyToken)((usuario, args, { db, userAuth }) => {
             return db.usuario.findById(userAuth.id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
                 return user;
@@ -51,8 +50,29 @@ const usuarioResolver = {
                 });
             })
         }),
+        criarCliente(parent, { input }, { db }) {
+            input.pessoa['tipo'] = 'cliente';
+            input['permissoes'] = [3];
+
+            return db.sequelize.transaction(async (t) => {
+                const user = await db.usuario.create(input, { transaction: t, include: db.pessoa });
+                await user.addPermissaos(input.permissoes, { transaction: t });
+                return user;
+            })
+        },
+        criarProfissional(parent, { input }, { db }) {
+            input.pessoa['tipo'] = 'profissional';
+            input['permissoes'] = [4];
+
+            return db.sequelize.transaction(async (t) => {
+                const user = await db.usuario.create(input, { transaction: t, include: db.pessoa });
+                await user.addPermissaos(input.permissoes, { transaction: t });
+                return user;
+            })
+        },
         deletarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
+
             return db.sequelize.transaction((t) => {
                 return db.usuario.findById(id).then((user) => {
                     if (!user) throw new Error(`User with id ${id} not found`);

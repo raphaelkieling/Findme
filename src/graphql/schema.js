@@ -6,15 +6,20 @@ const mutation = require('./mutation');
 const usuario   = require('./entities/usuario/usuario.schema').usuarioDef;
 const permissao = require('./entities/permissao/permissao.schema').permissaoDef;
 const token     = require('./entities/token/token.schema').tokenDef;
+const categoria = require('./entities/categoria/categoria.schema').categoriaDef;
+const pessoa    = require('./entities/pessoa/pessoa.schema').pessoaDef;
 
 const usuarioResolver   = require('./entities/usuario/usuario.resolver');
 const permissaoResolver = require('./entities/permissao/permissao.resolver');
 const tokenResolver     = require('./entities/token/token.resolvers');
+const categoriaResolver     = require('./entities/categoria/categoria.resolver');
 
 const resolvers = _.merge(
    usuarioResolver
   ,permissaoResolver
-  ,tokenResolver);
+  ,tokenResolver
+  ,categoriaResolver
+);
 
 const SchemaDefinition = `
   type Schema{
@@ -30,8 +35,10 @@ module.exports = graphql.makeExecutableSchema({
         query,
         mutation,
         permissao,
+        pessoa,
         usuario,
-        token
+        token,
+        categoria
     ],
     resolvers
 })

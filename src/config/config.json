@@ -6,6 +6,13 @@
     "host": "ryvdxs57afyjk41z.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
+  "offline": {
+    "username": "root",
+    "password": "1mbitubA",
+    "database": "findmeoff",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
   "test": {
     "username": "root",
     "password": null,
