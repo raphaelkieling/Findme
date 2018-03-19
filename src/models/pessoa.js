@@ -27,11 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     tipo: {
       type: DataTypes.ENUM,
-      values: ['cliente','profissional']
+      values: ['cliente', 'profissional']
     }
   }, {});
   pessoa.associate = function (models) {
-    // associations can be defined here
+    pessoa.belongsToMany(models.categoria, { through: 'pessoaToCategoria' });
+    console.warn('Mudar aqui para pessoaId em vez de enderecoId linha 35 pessoa.js')
+    pessoa.hasMany(models.endereco, { foreignKey: 'enderecoId' });
   };
   return pessoa;
 };

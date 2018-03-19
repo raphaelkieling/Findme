@@ -8,6 +8,8 @@ const pessoaDef = `
         cpnj:String
         telefone:String!
         tipo:String!
+        categorias:[Categoria!]
+        enderecos:[Endereco!]
     }
 
     input PessoaCreateInput{
@@ -17,6 +19,8 @@ const pessoaDef = `
         cpf:String
         cpnj:String
         telefone:String!
+        categorias:[ID!]        
+        enderecos: [EnderecoCadastroInput!]!
     }
 `;
 

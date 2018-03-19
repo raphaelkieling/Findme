@@ -37,9 +37,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
   usuario.associate = function (models) {
-    usuario.belongsToMany(models.permissao, { through: 'permissaoToUsuario' });
     // associations can be defined here
-    usuario.belongsTo(models.pessoa);
+    usuario.belongsToMany(models.permissao, { through: 'permissaoToUsuario' });
+    usuario.belongsTo(models.pessoa);     
   };
 
   usuario.prototype.isPassword = (senhaCodificada, senha) => {

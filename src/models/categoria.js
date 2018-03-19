@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   categoria.associate = function(models) {
     // associations can be defined here
+    categoria.belongsToMany(models.pessoa, { through: 'pessoaToCategoria' });
+    
   };
   return categoria;
 };

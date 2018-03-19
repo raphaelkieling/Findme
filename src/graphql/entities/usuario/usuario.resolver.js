@@ -13,18 +13,22 @@ const usuarioResolver = {
                         where: { id: usuario.get('id') }
                     }],
                 });
+        },
+        async pessoa(usuario, args, { db }) {
+            return await db.pessoa
+                .findById(usuario.get('pessoaId'));
         }
     },
     Query: {
         usuarios: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((usuarios, args, { db }) => {
             return db.usuario.findAll().then(res => res);
         }),
-        usuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((usuario, { id }, { db }) => {
+        usuario(usuario, { id }, { db }) {
             return db.usuario.findById(id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
                 return user;
             })
-        }),
+        },
         me: compose(authResolver, verifyToken)((usuario, args, { db, userAuth }) => {
             return db.usuario.findById(userAuth.id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
@@ -65,8 +69,23 @@ const usuarioResolver = {
             input['permissoes'] = [4];
 
             return db.sequelize.transaction(async (t) => {
-                const user = await db.usuario.create(input, { transaction: t, include: db.pessoa });
+                const user = await db.usuario.create(input, {
+                    transaction: t,
+                    include: [
+                        {
+                            model: db.pessoa,
+                            include: [{
+                                model: db.endereco
+                            }]
+                        }
+                    ]
+                });
+
+                const pessoa = user.pessoa;
+
                 await user.addPermissaos(input.permissoes, { transaction: t });
+                await pessoa.addCategoria(input.pessoa.categorias, { transaction: t });
+
                 return user;
             })
         },
