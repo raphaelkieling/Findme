@@ -5,9 +5,10 @@ const pessoaDef = `
         sobrenome:String
         nascimento:String!
         cpf:String
-        cpnj:String
+        cnpj:String
         telefone:String!
         tipo:String!
+        observacao: String!
         categorias:[Categoria!]
         enderecos:[Endereco!]
     }
@@ -17,7 +18,8 @@ const pessoaDef = `
         sobrenome:String
         nascimento:String!
         cpf:String
-        cpnj:String
+        cnpj:String
+        observacao: String!
         telefone:String!
         categorias:[ID!]        
         enderecos: [EnderecoCadastroInput!]!

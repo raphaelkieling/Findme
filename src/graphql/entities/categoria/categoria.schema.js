@@ -2,6 +2,7 @@ const categoriaDef = `
     type Categoria{
         id:ID!
         nome:String!
+        foto:String!
     }
 `;
 
@@ -12,8 +13,8 @@ const categoriaQuery = `
 `;
     
 const categoriaMutation = `
-    criarCategoria(nome:String!):Categoria!    
-    editarCategoria(id:ID!,nome:String!):Categoria!
+    criarCategoria(nome:String!,icone:String):Categoria!    
+    editarCategoria(id:ID!,nome:String!,icone:String):Categoria!
     deletarCategoria(id:ID!):Boolean   
 `;
 

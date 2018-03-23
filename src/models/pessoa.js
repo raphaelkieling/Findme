@@ -7,12 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     cpf: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     },
-    cpnj: {
-      type: DataTypes.STRING,
-      allowNull: false
+    cnpj: {
+      type: DataTypes.STRING
     },
     telefone: {
       type: DataTypes.STRING,
@@ -28,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     tipo: {
       type: DataTypes.ENUM,
       values: ['cliente', 'profissional']
+    },
+    observacao: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {});
   pessoa.associate = function (models) {

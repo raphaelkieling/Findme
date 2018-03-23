@@ -2,12 +2,14 @@ const enderecoDef = `
     type Endereco{
         id:ID
         cep:String!
-        latitude:String!
-        longitude:String!
+        latitude: Float!
+        longitude: Float!
         logradouro:String
         numero:String
         complemento:String
         bairro:String
+        cidade:String
+        estado:String
     }
 
     input EnderecoCadastroInput{
@@ -18,6 +20,8 @@ const enderecoDef = `
         numero:String
         complemento:String
         bairro:String
+        cidade:String
+        estado:String
     }
 `;
 

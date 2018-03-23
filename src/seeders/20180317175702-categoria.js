@@ -15,11 +15,13 @@ module.exports = {
 
     return queryInterface.bulkInsert('categoria', [
       {
-        nome: 'Limpeza',
+        nome: 'Eletricista',
+        foto: 'flash_on',
         id: 1
       },
       {
         nome: 'Encanamento',
+        foto: 'directions_car',
         id: 2
       }
     ], {});
