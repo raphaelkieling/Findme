@@ -30,6 +30,11 @@ const usuarioDef = `
         senha:String!
         pessoa:PessoaCreateInput!
     }
+
+    input editaProfissionalInput{
+        usuario:String!
+        pessoa:PessoaEditInput!
+    }
 `;
 
 const usuarioQuery = `
@@ -42,8 +47,10 @@ const usuarioMutation = `
     criarUsuario(input:criarUsuarioInput!):Usuario!
     criarCliente(input:criarClienteInput!):Usuario!
     criarProfissional(input:criarProfissionalInput!):Usuario!
+    editarProfissional(id:ID!,input:editaProfissionalInput!):Usuario!
     editarUsuario(id: ID!, input:editarUsuarioInput!):Usuario!
     deletarUsuario(id:ID!):Boolean!
+    desativarUsuario(id:ID!):Boolean!
 `;
 
 module.exports = {

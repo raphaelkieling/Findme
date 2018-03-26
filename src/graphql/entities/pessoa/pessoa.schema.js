@@ -3,7 +3,7 @@ const pessoaDef = `
         id:ID!
         nome:String!
         sobrenome:String
-        nascimento:String!
+        nascimento:String
         cpf:String
         cnpj:String
         telefone:String!
@@ -23,6 +23,14 @@ const pessoaDef = `
         telefone:String!
         categorias:[ID!]        
         enderecos: [EnderecoCadastroInput!]!
+    }
+
+    input PessoaEditInput{
+        nome:String!
+        sobrenome:String
+        nascimento:String!
+        observacao: String!
+        telefone:String!
     }
 `;
 

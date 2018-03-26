@@ -20,9 +20,13 @@ const usuarioResolver = {
         }
     },
     Query: {
-        usuarios: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((usuarios, args, { db }) => {
-            return db.usuario.findAll().then(res => res);
-        }),
+        async usuarios(usuarios, args, { db }) {
+            return await db.usuario.findAll({
+                include: [{
+                    model: db.pessoa
+                }]
+            });
+        },
         usuario(usuario, { id }, { db }) {
             return db.usuario.findById(id).then(user => {
                 if (!user) throw new Error(`User with id ${id} not found`);
@@ -37,15 +41,15 @@ const usuarioResolver = {
         })
     },
     Mutation: {
-        criarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { input }, { db }) => {
+        criarUsuario(parent, { input }, { db }) {
             return db.sequelize.transaction(async (t) => {
                 const user = await db.usuario.create(input, { transaction: t });
                 await user.addPermissaos(input.permissoes, { transaction: t });
                 return user;
 
             })
-        }),
-        editarUsuario: compose(authResolver, verifyToken, permissionCompose('user_dev', 'user_adm'))((parent, { id, input }, { db }) => {
+        },
+        editarUsuario(parent, { id, input }, { db }) {
             id = parseInt(id);
             return db.sequelize.transaction((t) => {
                 return db.usuario.findById(id).then((user) => {
@@ -53,7 +57,7 @@ const usuarioResolver = {
                     return user.update(input, { transaction: t });
                 });
             })
-        }),
+        },
         criarCliente(parent, { input }, { db }) {
             input.pessoa['tipo'] = 'cliente';
             input['permissoes'] = [3];
@@ -89,6 +93,24 @@ const usuarioResolver = {
                 return user;
             })
         },
+        editarProfissional(parent, { id, input }, { db }) {
+            return db.sequelize.transaction(async (t) => {
+
+                return db.usuario.findById(id).then((user) => {
+                    if (!user) throw new Error(`User with id ${id} not found`);
+
+                    return user.update(input, {
+                        transaction: t,
+                        include: [
+                            {
+                                model: db.pessoa
+                            }
+                        ]
+                    });
+                });
+
+            })
+        },
         deletarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
 
@@ -96,6 +118,16 @@ const usuarioResolver = {
                 return db.usuario.findById(id).then((user) => {
                     if (!user) throw new Error(`User with id ${id} not found`);
                     return user.destroy({ transaction: t }).then((res) => !!res);
+                });
+            })
+        },
+        desativarUsuario(parent, { id }, { db }) {
+            id = parseInt(id);
+
+            return db.sequelize.transaction((t) => {
+                return db.usuario.findById(id).then((user) => {
+                    if (!user) throw new Error(`User with id ${id} not found`);
+                    return user.update({ ativo: false }).then((res) => !!res)
                 });
             })
         }

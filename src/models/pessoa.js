@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+    nascimento:{
+      type: DataTypes.STRING
+    },
     cpf: {
       type: DataTypes.STRING
     },
