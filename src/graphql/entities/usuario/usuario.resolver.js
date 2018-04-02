@@ -93,10 +93,10 @@ const usuarioResolver = {
                 return user;
             })
         },
-        editarProfissional(parent, { id, input }, { db }) {
+        editarProfissional:compose(authResolver, verifyToken)((usuario, args, { db, userAuth }) => {
             return db.sequelize.transaction(async (t) => {
 
-                return db.usuario.findById(id).then((user) => {
+                return db.usuario.findById(userAuth.id).then((user) => {
                     if (!user) throw new Error(`User with id ${id} not found`);
 
                     return user.update(input, {
@@ -110,7 +110,7 @@ const usuarioResolver = {
                 });
 
             })
-        },
+        }),
         deletarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
 
