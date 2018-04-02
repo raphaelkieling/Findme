@@ -93,7 +93,7 @@ const usuarioResolver = {
                 return user;
             })
         },
-        editarProfissional:compose(authResolver, verifyToken)((usuario, args, { db, userAuth }) => {
+        editarProfissional: compose(authResolver, verifyToken)((usuario, { input }, { db, userAuth }) => {
             return db.sequelize.transaction(async (t) => {
 
                 return db.usuario.findById(userAuth.id).then((user) => {
