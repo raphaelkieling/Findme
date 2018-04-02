@@ -26,11 +26,16 @@ const pessoaDef = `
     }
 
     input PessoaEditInput{
+        id:ID!
         nome:String!
         sobrenome:String
-        nascimento:String!
-        observacao: String!
+        nascimento:String
+        cpf:String
+        cnpj:String
         telefone:String!
+        observacao: String!
+        categorias:[Categoria!]
+        enderecos:[Endereco!]
     }
 `;
 
