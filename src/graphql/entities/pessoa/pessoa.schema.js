@@ -34,7 +34,7 @@ const pessoaDef = `
         telefone:String!
         observacao: String!
         categorias:[ID!]
-        enderecos:[EnderecoCadastroInput!]
+        enderecos:[EnderecoEditInput!]
     }
 `;
 
