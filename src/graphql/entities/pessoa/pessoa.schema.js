@@ -26,7 +26,6 @@ const pessoaDef = `
     }
 
     input PessoaEditInput{
-        id:ID!
         nome:String!
         sobrenome:String
         nascimento:String
@@ -34,8 +33,8 @@ const pessoaDef = `
         cnpj:String
         telefone:String!
         observacao: String!
-        categorias:[Categoria!]
-        enderecos:[Endereco!]
+        categorias:[ID!]
+        enderecos:[EnderecoCadastroInput!]
     }
 `;
 
