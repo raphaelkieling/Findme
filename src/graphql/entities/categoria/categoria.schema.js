@@ -13,8 +13,8 @@ const categoriaQuery = `
 `;
     
 const categoriaMutation = `
-    criarCategoria(nome:String!,icone:String):Categoria!    
-    editarCategoria(id:ID!,nome:String!,icone:String):Categoria!
+    criarCategoria(nome:String!,foto:String):Categoria!    
+    editarCategoria(id:ID!,nome:String!,foto:String):Categoria!
     deletarCategoria(id:ID!):Boolean   
 `;
 

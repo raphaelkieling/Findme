@@ -8,16 +8,16 @@ const categoriaResolver = {
         }
     },
     Mutation: {
-        criarCategoria(categoria, { nome, icone }, { db }) {
+        criarCategoria(categoria, { nome, foto }, { db }) {
             return db.sequelize.transaction(async (t) => {
-                return await db.categoria.create({ nome, foto: icone }, { transaction: t });
+                return await db.categoria.create({ nome, foto }, { transaction: t });
             })
         },
-        editarCategoria(categoria, { id, nome }, { db }) {
+        editarCategoria(categoria, { id, nome, foto }, { db }) {
             return db.sequelize.transaction((t) => {
                 return db.categoria.findById(id).then(async (categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
-                    return await categoria.update({ nome, foto: icone }, { transaction: t });
+                    return await categoria.update({ nome, foto }, { transaction: t });
                 });
             })
         },
