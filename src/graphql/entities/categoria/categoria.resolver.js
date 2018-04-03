@@ -23,6 +23,7 @@ const categoriaResolver = {
         },
         deletarCategoria(categoriaParent, { id }, { db }) {
             id = parseInt(id);
+            
             return db.sequelize.transaction((t) => {
                 return db.categoria.findById(id).then(async (categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
