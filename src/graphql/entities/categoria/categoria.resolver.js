@@ -17,7 +17,7 @@ const categoriaResolver = {
             return db.sequelize.transaction((t) => {
                 return db.categoria.findById(id).then((categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
-                    return categoria.update({ nome, foto: icone }, { transaction: t });
+                    return await categoria.update({ nome, foto: icone }, { transaction: t });
                 });
             })
         },
