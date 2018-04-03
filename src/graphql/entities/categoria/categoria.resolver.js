@@ -15,7 +15,7 @@ const categoriaResolver = {
         },
         editarCategoria(categoria, { id, nome }, { db }) {
             return db.sequelize.transaction((t) => {
-                return db.categoria.findById(id).then((categoria) => {
+                return db.categoria.findById(id).then(async (categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
                     return await categoria.update({ nome, foto: icone }, { transaction: t });
                 });
@@ -23,7 +23,7 @@ const categoriaResolver = {
         },
         deletarCategoria(categoriaParent, { id }, { db }) {
             id = parseInt(id);
-            
+
             return db.sequelize.transaction((t) => {
                 return db.categoria.findById(id).then(async (categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
