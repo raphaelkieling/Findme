@@ -95,19 +95,19 @@ const usuarioResolver = {
         },
         editarProfissional: compose(authResolver, verifyToken)((usuario, { input }, { db, userAuth }) => {
             return db.sequelize.transaction(async (t) => {
+                return db.usuario.findById(userAuth.id, { transaction: t })
+                    .then(async (user) => {
+                        if (!user) throw new Error(`User with id ${id} not found`);
 
-                return db.usuario.findById(userAuth.id).then((user) => {
-                    if (!user) throw new Error(`User with id ${id} not found`);
-
-                    return user.update(input, {
-                        transaction: t,
-                        include: [
-                            {
-                                model: db.pessoa
-                            }
-                        ]
+                        return await user.update(input, {
+                            transaction: t,
+                            include: [
+                                {
+                                    model: db.pessoa
+                                }
+                            ]
+                        });
                     });
-                });
 
             })
         }),

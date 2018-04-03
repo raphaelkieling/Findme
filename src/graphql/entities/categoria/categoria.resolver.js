@@ -10,14 +10,14 @@ const categoriaResolver = {
     Mutation: {
         criarCategoria(categoria, { nome, icone }, { db }) {
             return db.sequelize.transaction(async (t) => {
-                return await db.categoria.create({ nome, icone }, { transaction: t });
+                return await db.categoria.create({ nome, foto: icone }, { transaction: t });
             })
         },
         editarCategoria(categoria, { id, nome }, { db }) {
             return db.sequelize.transaction((t) => {
                 return db.categoria.findById(id).then((categoria) => {
                     if (!categoria) throw new Error(`Categoria with id ${id} not found`);
-                    return categoria.update({ nome, icone }, { transaction: t });
+                    return categoria.update({ nome, foto: icone }, { transaction: t });
                 });
             })
         },

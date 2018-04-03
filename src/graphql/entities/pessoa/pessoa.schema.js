@@ -26,6 +26,7 @@ const pessoaDef = `
     }
 
     input PessoaEditInput{
+        id:ID!
         nome:String!
         sobrenome:String
         nascimento:String
