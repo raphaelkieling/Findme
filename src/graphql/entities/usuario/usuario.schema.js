@@ -49,8 +49,8 @@ const usuarioMutation = `
     criarProfissional(input:criarProfissionalInput!):Usuario!
     editarProfissional(input:editaProfissionalInput!):Usuario!
     editarUsuario(id: ID!, input:editarUsuarioInput!):Usuario!
-    deletarUsuario(id:ID!):Boolean!
-    desativarUsuario(id:ID!):Boolean!
+    deletarUsuario(id:ID!):ID!
+    desativarUsuario(id:ID!):ID!
 `;
 
 module.exports = {
