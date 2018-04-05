@@ -94,21 +94,16 @@ const usuarioResolver = {
             })
         },
         editarProfissional: compose(authResolver, verifyToken)((usuario, { input }, { db, userAuth }) => {
-            return db.sequelize.transaction(async (t) => {
-                return db.usuario.findById(userAuth.id, { transaction: t })
-                    .then(async (user) => {
+            return db.sequelize.transaction((t) => {
+                return db.usuario
+                    .findById(userAuth.id, { include: db.pessoa })
+                    .then((user) => {
                         if (!user) throw new Error(`User with id ${id} not found`);
 
-                        return await user.update(input, {
-                            transaction: t,
-                            include: [
-                                {
-                                    model: db.pessoa
-                                }
-                            ]
-                        });
+                        return user.pessoa
+                            .updateAttributes(input.pessoa, { transaction: t })
+                            .then((pessoa) => user.update(input, { transaction: t }));
                     });
-
             })
         }),
         deletarUsuario(parent, { id }, { db }) {
