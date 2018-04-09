@@ -2,6 +2,7 @@ const usuarioMutation = require('./entities/usuario/usuario.schema').usuarioMuta
 const permissaoMutation = require('./entities/permissao/permissao.schema').permissaoMutation;
 const tokenMutation = require('./entities/token/token.schema').tokenMutations;
 const categoriaMutation = require('./entities/categoria/categoria.schema').categoriaMutation;
+const pessoaMutation = require('./entities/pessoa/pessoa.schema').pessoaMutation;
 
 const Mutation = `
     type Mutation{
@@ -9,6 +10,7 @@ const Mutation = `
         ${permissaoMutation}
         ${usuarioMutation}
         ${categoriaMutation}
+        ${pessoaMutation}
     }
 `;
 

@@ -39,7 +39,13 @@ const pessoaDef = `
     }
 `;
 
+const pessoaMutation = `
+    retiraCategoriaPessoa(idCategoria:ID!,idPessoa:ID!):ID!
+    adicionaCategoriaPessoa(idCategoria:ID!,idPessoa:ID!):ID!
+`;
+
 
 module.exports = {
-    pessoaDef
+    pessoaDef,
+    pessoaMutation
 }
