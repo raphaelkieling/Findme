@@ -8,6 +8,7 @@ const pessoaDef = `
         cnpj:String
         telefone:String!
         tipo:String!
+        avatar:Foto
         observacao: String!
         categorias:[Categoria!]
         enderecos:[Endereco!]
@@ -34,6 +35,7 @@ const pessoaDef = `
         cnpj:String
         telefone:String!
         observacao: String!
+        avatar: FotoInput
         categorias:[ID!]
         enderecos:[EnderecoEditInput!]
     }
@@ -42,6 +44,7 @@ const pessoaDef = `
 const pessoaMutation = `
     retiraCategoriaPessoa(idCategoria:ID!,idPessoa:ID!):ID!
     adicionaCategoriaPessoa(idCategoria:ID!,idPessoa:ID!):ID!
+    adicionarFoto(idPessoa:ID!, base64:String!):Foto!
 `;
 
 

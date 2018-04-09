@@ -12,7 +12,7 @@ const pessoaResolver = {
                     for (let i = 0; i <= res.length - 1; i++) {
                         let categoria = await db.categoria.findById(res[i].get('categoriumId'))
 
-                        if(!categoria) return;
+                        if (!categoria) return;
 
                         categorias.push(categoria);
                     }
@@ -27,6 +27,14 @@ const pessoaResolver = {
                         enderecoId: pessoa.get('id')
                     }
                 });
+        },
+        async avatar(pessoa, args, { db }) {
+            return await db.foto
+                .findOne({
+                    where: {
+                        pessoaId: pessoa.get('id')
+                    }
+                })
         }
     },
     Mutation: {
@@ -55,6 +63,19 @@ const pessoaResolver = {
 
                     return idCategoria;
                 });
+            })
+        },
+        adicionarFoto: (pessoa, { idPessoa, base64 }, { db }) => {
+            return db.sequelize.transaction((t) => {
+                return db.pessoa.findById(idPessoa)
+                    .then(async (pessoa) => {
+                        if (!pessoa) throw new Error(`Pessoa with id ${id} not found`);
+
+                        let foto = await db.foto.create({ base64 }, { transaction: t });
+                        pessoa.setFoto(foto);
+
+                        return foto;
+                    });
             })
         }
     }

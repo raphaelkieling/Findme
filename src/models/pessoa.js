@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    nascimento:{
+    nascimento: {
       type: DataTypes.STRING
     },
     cpf: {
@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     pessoa.belongsToMany(models.categoria, { through: 'pessoaToCategoria' });
     console.warn('Mudar aqui para pessoaId em vez de enderecoId linha 35 pessoa.js')
     pessoa.hasMany(models.endereco, { foreignKey: 'enderecoId' });
+    pessoa.hasOne(models.foto, { foreignKey: 'pessoaId' });     
   };
   return pessoa;
 };

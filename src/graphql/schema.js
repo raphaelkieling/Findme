@@ -9,6 +9,7 @@ const token = require('./entities/token/token.schema').tokenDef;
 const categoria = require('./entities/categoria/categoria.schema').categoriaDef;
 const pessoa = require('./entities/pessoa/pessoa.schema').pessoaDef;
 const endereco = require('./entities/endereco/endereco.schema').enderecoDef;
+const foto = require('./entities/foto/foto.schema').fotoDef;
 
 const usuarioResolver = require('./entities/usuario/usuario.resolver');
 const permissaoResolver = require('./entities/permissao/permissao.resolver');
@@ -37,6 +38,7 @@ module.exports = graphql.makeExecutableSchema({
     SchemaDefinition,
     query,
     mutation,
+    foto,
     permissao,
     pessoa,
     usuario,

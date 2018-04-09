@@ -106,6 +106,18 @@ const usuarioResolver = {
                     });
             })
         }),
+        editarSenha: compose(authResolver, verifyToken)((usuario, { senha }, { db, userAuth }) => {
+            return db.sequelize.transaction((t) => {
+                return db.usuario
+                    .findById(userAuth.id, { include: db.pessoa })
+                    .then(async (user) => {
+                        if (!user) throw new Error(`User with id ${id} not found`);
+
+                        return !!await user
+                            .update({ senha }, { transaction: t });
+                    });
+            })
+        }),
         deletarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
 

@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           user.senha = bcryptjs.hashSync(user.senha, salt);
         },
         beforeUpdate: (user, options) => {
-          if (user.changed('password')) {
+          if (user.changed('senha')) {
             const salt = bcryptjs.genSaltSync();
             user.senha = bcryptjs.hashSync(user.senha, salt);
           }
