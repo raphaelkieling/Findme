@@ -38,8 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   pessoa.associate = function (models) {
     pessoa.belongsToMany(models.categoria, { through: 'pessoaToCategoria' });
-    console.warn('Mudar aqui para pessoaId em vez de enderecoId linha 35 pessoa.js')
-    pessoa.hasMany(models.endereco, { foreignKey: 'enderecoId' });
+    pessoa.hasMany(models.endereco, { foreignKey: 'pessoaId' });
     pessoa.hasOne(models.foto, { foreignKey: 'pessoaId' });     
   };
   return pessoa;

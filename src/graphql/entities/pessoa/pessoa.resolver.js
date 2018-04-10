@@ -24,7 +24,7 @@ const pessoaResolver = {
             return await db.endereco
                 .findAll({
                     where: {
-                        enderecoId: pessoa.get('id')
+                        pessoaId: pessoa.get('id')
                     }
                 });
         },

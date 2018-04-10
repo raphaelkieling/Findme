@@ -46,7 +46,6 @@ const usuarioResolver = {
                 const user = await db.usuario.create(input, { transaction: t });
                 await user.addPermissaos(input.permissoes, { transaction: t });
                 return user;
-
             })
         },
         editarUsuario(parent, { id, input }, { db }) {
