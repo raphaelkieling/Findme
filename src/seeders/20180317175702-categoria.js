@@ -20,8 +20,8 @@ module.exports = {
         id: 1
       },
       {
-        nome: 'Encanamento',
-        foto: 'directions_car',
+        nome: 'Mecânico',
+        foto: 'build',
         id: 2
       }
     ], {});

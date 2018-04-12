@@ -6,14 +6,18 @@ const tokenResolvers = {
         createToken(paren, { usuario, senha }, { db }) {
             return db.usuario.findOne({
                 where: { usuario },
-                attributes: ['id', 'usuario', 'senha','pessoaId'],
+                attributes: ['id', 'usuario', 'senha', 'pessoaId'],
                 include: [
-                {
-                    model: db.permissao,
-                    attributes: ['id', 'nome']
-                },{
-                    model: db.pessoa
-                }]
+                    {
+                        model: db.permissao,
+                        attributes: ['id', 'nome']
+                    }, {
+                        model: db.pessoa,
+                        include: [{
+                            model: db.categoria,
+                            as: 'categorias'
+                        }]
+                    }]
             }).then((user) => {
                 let errorMessage = 'Não autorizado, usuário ou senha incorretas';
 

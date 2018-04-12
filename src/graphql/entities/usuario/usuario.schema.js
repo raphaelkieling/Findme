@@ -35,6 +35,11 @@ const usuarioDef = `
         usuario:String!
         pessoa:PessoaEditInput!
     }
+
+    input editaClienteInput{
+        usuario:String!
+        pessoa:PessoaEditInput!
+    }
 `;
 
 const usuarioQuery = `

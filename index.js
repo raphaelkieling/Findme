@@ -1,14 +1,15 @@
-const app = require("./src");
+const { server } = require("./src");
 const models = require("./src/models");
 
-function listenServer() {
-  const PORT = process.env.PORT || 3000;
+let listening = async () => {
+    await models.sequelize.sync({ force: false, logging: false })
 
-  app.listen(PORT, () => {
-    console.log(`Listening in port ${PORT}`);
-  });
+    const PORT = process.env.PORT || 3000;
+
+    server.listen(PORT, () => {
+        console.log(`Listening in port ${PORT}`);
+    });
 }
 
-models.sequelize.sync({ force: false, logging: true }).then(() => {
-  listenServer();
-});
+listening();
+

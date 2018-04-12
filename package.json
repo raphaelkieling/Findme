@@ -36,6 +36,7 @@
     "graphql-tools": "^2.21.0",
     "jsonwebtoken": "^8.2.0",
     "lodash": "^4.17.5",
+    "memory-cache": "^0.2.0",
     "mysql2": "^1.5.2",
     "nodemon": "^1.17.1",
     "sequelize": "^4.35.2",

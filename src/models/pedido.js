@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+    titulo:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     observacao: {
       type: DataTypes.STRING,
       allowNull: false
@@ -18,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     dataVencimento: {
       type: DataTypes.DATE
+    },
+    latitude: {
+      type: DataTypes.FLOAT
+    },
+    longitude: {
+      type: DataTypes.FLOAT
     },
     ativo: {
       type: DataTypes.BOOLEAN,

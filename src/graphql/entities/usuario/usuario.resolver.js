@@ -60,9 +60,19 @@ const usuarioResolver = {
         criarCliente(parent, { input }, { db }) {
             input.pessoa['tipo'] = 'cliente';
             input['permissoes'] = [3];
-
+            console.log(input);
             return db.sequelize.transaction(async (t) => {
-                const user = await db.usuario.create(input, { transaction: t, include: db.pessoa });
+                const user = await db.usuario.create(input, {
+                    transaction: t,
+                    include: [
+                        {
+                            model: db.pessoa,
+                            include: [{
+                                model: db.endereco
+                            }]
+                        }
+                    ]
+                });
                 await user.addPermissaos(input.permissoes, { transaction: t });
                 return user;
             })
