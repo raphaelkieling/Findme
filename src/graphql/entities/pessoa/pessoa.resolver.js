@@ -1,3 +1,4 @@
+
 const pessoaResolver = {
     Pessoa: {
         async categorias(pessoa, args, { db }) {

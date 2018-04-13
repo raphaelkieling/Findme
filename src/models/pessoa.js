@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     observacao: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    avatarMarker: DataTypes.VIRTUAL
   }, {});
   pessoa.associate = function (models) {
     pessoa.belongsToMany(models.categoria, { as: 'categorias', through: 'pessoaToCategoria' });

@@ -18,6 +18,7 @@ const tokenResolver = require('./entities/token/token.resolvers');
 const categoriaResolver = require('./entities/categoria/categoria.resolver');
 const pessoaResolver = require('./entities/pessoa/pessoa.resolver');
 const pedidoResolver = require('./entities/pedido/pedido.resolver');
+const fotoResolver = require('./entities/foto/foto.resolver');
 
 const resolvers = _.merge(
   usuarioResolver
@@ -26,6 +27,7 @@ const resolvers = _.merge(
   , categoriaResolver
   , pessoaResolver
   , pedidoResolver
+  , fotoResolver
 );
 
 const SchemaDefinition = `
