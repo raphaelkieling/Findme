@@ -41,9 +41,11 @@ const pedidoResolver = {
                 pedido.setCategoria(categoria);
                 pedido.setCliente(cliente);
 
+
                 io.emit(`categoria-${input.categoriaId}`, {
                     pedido,
-                    cliente
+                    cliente,
+                    categoria
                 });
 
                 return pedido;
