@@ -6,7 +6,7 @@ const tokenResolvers = {
         createToken(paren, { usuario, senha }, { db }) {
             return db.usuario.findOne({
                 where: { usuario },
-                attributes: ['id', 'usuario', 'senha', 'pessoaId'],
+                attributes: ['id','ativo', 'usuario', 'senha', 'pessoaId'],
                 include: [
                     {
                         model: db.permissao,
@@ -24,7 +24,9 @@ const tokenResolvers = {
                 if (!user || !user.isPassword(user.get('senha'), senha))
                     throw new Error(errorMessage);
 
-
+                if(!user.get('ativo')){
+                    throw new Error('Você foi desativado do sistema, contate o suporte!');
+                }
 
                 const payload = {
                     sub: user.get('id'),

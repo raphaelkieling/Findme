@@ -125,18 +125,8 @@ const usuarioResolver = {
                         return !!await user
                             .update({ senha }, { transaction: t });
                     });
-            })
+            });
         }),
-        deletarUsuario(parent, { id }, { db }) {
-            id = parseInt(id);
-
-            return db.sequelize.transaction((t) => {
-                return db.usuario.findById(id).then((user) => {
-                    if (!user) throw new Error(`User with id ${id} not found`);
-                    return user.destroy({ transaction: t }).then((res) => !!res);
-                });
-            })
-        },
         desativarUsuario(parent, { id }, { db }) {
             id = parseInt(id);
 
@@ -144,6 +134,16 @@ const usuarioResolver = {
                 return db.usuario.findById(id).then((user) => {
                     if (!user) throw new Error(`User with id ${id} not found`);
                     return user.update({ ativo: false }).then((res) => !!res)
+                });
+            })
+        },
+        ativarUsuario(parent, { id }, { db }) {
+            id = parseInt(id);
+
+            return db.sequelize.transaction((t) => {
+                return db.usuario.findById(id).then((user) => {
+                    if (!user) throw new Error(`User with id ${id} not found`);
+                    return user.update({ ativo: true }).then((res) => !!res)
                 });
             })
         }

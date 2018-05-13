@@ -55,7 +55,7 @@ const usuarioMutation = `
     editarProfissional(input:editaProfissionalInput!):Usuario!
     editarUsuario(id: ID!, input:editarUsuarioInput!):Usuario!
     editarSenha(senha:String!):Boolean!
-    deletarUsuario(id:ID!):ID!
+    ativarUsuario(id:ID!):ID!
     desativarUsuario(id:ID!):ID!
 `;
 

@@ -8,10 +8,6 @@ const db = require('../models');
 
 
 module.exports = (io) => {
-    io.sockets.on('connection',(socket)=>{
-        console.log('User connected-----------------------------------------------');
-    })
-
     router.get("/welcome", welcomeRouter.welcome);
     router.get("/", welcomeRouter.welcome);
 
