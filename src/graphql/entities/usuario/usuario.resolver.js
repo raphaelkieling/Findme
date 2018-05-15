@@ -127,13 +127,17 @@ const usuarioResolver = {
                     });
             });
         }),
-        desativarUsuario(parent, { id }, { db }) {
+        desativarUsuario(parent, { id }, { db, io }) {
             id = parseInt(id);
 
             return db.sequelize.transaction((t) => {
                 return db.usuario.findById(id).then((user) => {
                     if (!user) throw new Error(`User with id ${id} not found`);
-                    return user.update({ ativo: false }).then((res) => !!res)
+                    return user.update({ ativo: false }).then((res) => {
+                        console.log(`logout-user-${id}`);
+                        io.emit(`logout-user-${id}`, {})
+                        return !!res
+                    })
                 });
             })
         },
