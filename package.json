@@ -42,7 +42,7 @@
     "nodemon": "^1.17.1",
     "sequelize": "^4.35.2",
     "sharp": "^0.20.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^1.7.0"
   },
   "devDependencies": {
     "husky": "^0.15.0-rc.8"
