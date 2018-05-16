@@ -11,6 +11,7 @@ const pessoa = require('./entities/pessoa/pessoa.schema').pessoaDef;
 const endereco = require('./entities/endereco/endereco.schema').enderecoDef;
 const foto = require('./entities/foto/foto.schema').fotoDef;
 const pedido = require('./entities/pedido/pedido.schema').pedidoDef;
+const comentario = require('./entities/comentario/comentario.schema').comentarioDef;
 
 const usuarioResolver = require('./entities/usuario/usuario.resolver');
 const permissaoResolver = require('./entities/permissao/permissao.resolver');
@@ -19,6 +20,7 @@ const categoriaResolver = require('./entities/categoria/categoria.resolver');
 const pessoaResolver = require('./entities/pessoa/pessoa.resolver');
 const pedidoResolver = require('./entities/pedido/pedido.resolver');
 const fotoResolver = require('./entities/foto/foto.resolver');
+const comentarioResolver = require('./entities/comentario/comentario.resolver');
 
 const resolvers = _.merge(
   usuarioResolver
@@ -28,6 +30,7 @@ const resolvers = _.merge(
   , pessoaResolver
   , pedidoResolver
   , fotoResolver
+  , comentarioResolver
 );
 
 const SchemaDefinition = `
@@ -50,7 +53,8 @@ module.exports = graphql.makeExecutableSchema({
     usuario,
     token,
     categoria,
-    endereco
+    endereco,
+    comentario
   ],
   resolvers
 })

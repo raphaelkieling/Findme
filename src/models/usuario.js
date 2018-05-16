@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     usuario.belongsToMany(models.permissao, { through: 'permissaoToUsuario' });
     usuario.belongsTo(models.pessoa);
+
+    usuario.hasMany(models.comentario, { foreignKey: 'usuario_criador' });
+    usuario.hasMany(models.comentario, { foreignKey: 'usuario_recebeu' });
+
     usuario.hasMany(models.pedido, { foreignKey: 'clienteId' });
     usuario.hasMany(models.pedido, { foreignKey: 'profissionalId' });
   };
