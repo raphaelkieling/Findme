@@ -3,6 +3,7 @@ const permissaoQuery = require('./entities/permissao/permissao.schema').permissa
 const categoriaQuery = require('./entities/categoria/categoria.schema').categoriaQuery;
 const pedidoQuery = require('./entities/pedido/pedido.schema').pedidoQuery;
 const comentarioQuery = require('./entities/comentario/comentario.schema').comentarioQuery;
+const mensagemQuery = require('./entities/mensagem/mensagem.schema').mensagemQuery;
 
 const Query = `
     type Query {
@@ -11,6 +12,7 @@ const Query = `
         ${categoriaQuery}
         ${pedidoQuery}
         ${comentarioQuery}
+        ${mensagemQuery}
     }
 `;
 

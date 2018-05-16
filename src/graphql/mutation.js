@@ -5,6 +5,7 @@ const categoriaMutation = require('./entities/categoria/categoria.schema').categ
 const pessoaMutation = require('./entities/pessoa/pessoa.schema').pessoaMutation;
 const pedidoMutation = require('./entities/pedido/pedido.schema').pedidoMutation;
 const comentarioMutation = require('./entities/comentario/comentario.schema').comentarioMutation;
+const mensagemMutation = require('./entities/mensagem/mensagem.schema').mensagemMutation;
 
 const Mutation = `
     type Mutation{
@@ -15,6 +16,7 @@ const Mutation = `
         ${pessoaMutation}
         ${pedidoMutation}
         ${comentarioMutation}
+        ${mensagemMutation}
     }
 `;
 
