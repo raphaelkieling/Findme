@@ -9,6 +9,7 @@ const pessoaDef = `
         telefone:String!
         tipo:String!
         avatar:Foto
+        distanceToMe: Float
         observacao: String!
         categorias:[Categoria!]
         enderecos:[Endereco!]

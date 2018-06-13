@@ -1,3 +1,4 @@
+const haversine = require('haversine')
 
 const pessoaResolver = {
     Pessoa: {
@@ -20,6 +21,30 @@ const pessoaResolver = {
 
                     return categorias;
                 });
+        },
+        async distanceToMe(pessoa, args, { db, userAuth }) {
+            let enderecoPessoa = await db.endereco
+                .findOne({
+                    where: {
+                        pessoaId: pessoa.get('id')
+                    }
+                });
+
+            let usuario = await db.usuario
+                .findById(userAuth.id, {
+                    include: [{
+                        model: db.pessoa
+                    }],
+                })
+
+            let enderecoPessoaLogada = await db.endereco
+                .findOne({
+                    where: {
+                        pessoaId: usuario.pessoa.id
+                    }
+                });
+
+            return haversine(enderecoPessoa, enderecoPessoaLogada).toFixed(3)
         },
         async enderecos(pessoa, args, { db }) {
             return await db.endereco

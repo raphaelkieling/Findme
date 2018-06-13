@@ -17,6 +17,9 @@ const usuarioResolver = {
         async pessoa(usuario, args, { db }) {
             return await db.pessoa
                 .findById(usuario.get('pessoaId'));
+        },
+        senha() {
+            return "";
         }
     },
     Query: {
