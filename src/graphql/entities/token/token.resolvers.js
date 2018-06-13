@@ -3,7 +3,7 @@ const secret = require('../../../utils/utils').JWT_SECRET;
 
 const tokenResolvers = {
     Mutation: {
-        createToken(paren, { usuario, senha }, { db }) {
+        createToken(parent, { usuario, senha }, { db }) {
             return db.usuario.findOne({
                 where: { usuario },
                 attributes: ['id','ativo', 'usuario', 'senha', 'pessoaId'],

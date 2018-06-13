@@ -23,25 +23,27 @@ const pedidoDef = `
     input PedidoEditInput{
         id:ID!
         observacao:String!
-        status:String!
         dataVencimento:String!
-        ativo:Boolean!
         titulo:String!
-        latitude: Float!
-        longitude: Float!
+        categoriaId:ID!
     }
 `;
 
 const pedidoQuery = `
     pedidosCategorias(categoriasId:[ID!]!):[Pedido!]
     pedido(id:ID!):Pedido
+
     pedidos:[Pedido!]
+    pedidosFinalizados:[Pedido!]
+    
     pedidosProfissional:[Pedido!]
     pedidosCliente:[Pedido!] 
-`;
+    pedidosClienteFinalizados:[Pedido!] 
+
+    `;
 
 const pedidoMutation = `
-    cancelarPedido(idPedido:ID!):Boolean!
+    cancelarPedido(id:ID!): Boolean
     criarPedido(input:PedidoCreateInput!):Pedido!
     editarPedido(input:PedidoEditInput!):Pedido!
 `;

@@ -37,6 +37,8 @@ const pessoaResolver = {
                     }],
                 })
 
+            if (!usuario.pessoa) return 0;
+
             let enderecoPessoaLogada = await db.endereco
                 .findOne({
                     where: {
