@@ -31,7 +31,7 @@ const mensagemResolver = {
         async mensagemsLista(mensagem, args, { db, userAuth }) {
             return await db.mensagem
                 .findAll({
-                    group: ['usuario_recebeu'],
+                    group: ['usuario_enviou'],
                     where: {
                         $or: [
                             {
